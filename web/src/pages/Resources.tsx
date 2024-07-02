@@ -1,7 +1,6 @@
 import { Divider, IconButton, Input, Tooltip } from "@mui/joy";
 import { includes } from "lodash-es";
 import { useEffect, useState } from "react";
-import { showCommonDialog } from "@/components/Dialog/CommonDialog";
 import Empty from "@/components/Empty";
 import Icon from "@/components/Icon";
 import MobileHeader from "@/components/MobileHeader";
@@ -58,23 +57,18 @@ const Resources = () => {
     });
   }, []);
 
-  const handleDeleteUnusedResources = () => {
-    showCommonDialog({
-      title: "Delete all unused resources",
-      content: "Are you sure to delete all unused resources? This action cannot be undone.",
-      style: "warning",
-      dialogName: "delete-unused-resources-dialog",
-      onConfirm: async () => {
-        for (const resource of unusedResources) {
-          await resourceServiceClient.deleteResource({ name: resource.name });
-        }
-        setResources(resources.filter((resource) => resource.memo));
-      },
-    });
+  const handleDeleteUnusedResources = async () => {
+    const confirmed = window.confirm("Are you sure to delete all unused resources? This action cannot be undone.");
+    if (confirmed) {
+      for (const resource of unusedResources) {
+        await resourceServiceClient.deleteResource({ name: resource.name });
+      }
+      setResources(resources.filter((resource) => resource.memo));
+    }
   };
 
   return (
-    <section className="@container w-full max-w-4xl min-h-full flex flex-col justify-start items-center sm:pt-3 md:pt-6 pb-8">
+    <section className="@container w-full max-w-5xl min-h-full flex flex-col justify-start items-center sm:pt-3 md:pt-6 pb-8">
       <MobileHeader />
       <div className="w-full px-4 sm:px-6">
         <div className="w-full shadow flex flex-col justify-start items-start px-4 py-3 rounded-xl bg-white dark:bg-zinc-800 text-black dark:text-gray-300">

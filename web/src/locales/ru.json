@@ -95,7 +95,6 @@
   "memo": {
     "archived-at": "Архив",
     "comment": {
-      "no-comment": "Комментариев нет",
       "self": "Комментарии"
     },
     "copy-link": "Скопировать ссылку",
@@ -113,8 +112,7 @@
       "private": "Видно только вам",
       "protected": "Видно только пользователям",
       "public": "Видно всем"
-    },
-    "wrapping": "Перенос"
+    }
   },
   "message": {
     "archived-successfully": "Успешная архивация",
